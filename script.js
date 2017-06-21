@@ -1,6 +1,6 @@
 //parse data
 var svg = d3.select("svg"),
-    margin = {top: 20, right: 20, bottom: 30, left: 40},
+    margin = {top: 10, right: 20, bottom: 30, left: 40},
     width = +svg.attr("width")  - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom;
 
@@ -18,7 +18,7 @@ var xAxis = d3.svg.axis()
 var yAxis = d3.svg.axis()
               .scale(y)
               .orient("left")
-              .ticks(2000);
+              .ticks(10, "B");
 
 var g = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -45,6 +45,7 @@ $.getJSON("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/m
 
   svg.append("g")
       .attr("class", "y axis")
+      .attr("transform", "translate(200,0)")
       .call(yAxis)
     .append("text")
       .attr("transform", "rotate(-90)")
