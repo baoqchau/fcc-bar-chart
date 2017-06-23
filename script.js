@@ -12,8 +12,7 @@ var y = d3.scale.linear().range([height, 0]);
 
 var xAxis = d3.svg.axis()
   .scale(x)
-  .orient("bottom")
-  .tickFormat(d3.time.format("%Y"));
+  .orient("bottom");
 
 var yAxis = d3.svg.axis()
               .scale(y)
@@ -35,31 +34,21 @@ $.getJSON("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/m
 
   svg.append("g")
       .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis)
-    .selectAll("text")
-      .style("text-anchor", "end")
-      .attr("dx", "-.8em")
-      .attr("dy", "-.55em")
-      .attr("transform", "rotate(-90)" );
+      .attr("transform", "translate(0," + height + ")");
 
   svg.append("g")
       .attr("class", "y axis")
-      .attr("transform", "translate(200,0)")
-      .call(yAxis)
-    .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("Value ($)");
+      .attr("transform", "translate(40,10)")
+      .call(yAxis);
+   
 
-  svg.selectAll("bar")
+  svg.selectAll("rect")
       .data(data)
     .enter().append("rect")
-      .style("fill", "steelblue")
+      .attr("class", "bar")
       .attr("x", function(d) { return x(d.date); })
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.value); })
-      .attr("height", function(d) { return height - y(d.value); });
+      .attr("height", function(d) { return height - y(d.value); })
+      .attr("transform", "translate(5,10)");
 });
